@@ -1,0 +1,757 @@
+{
+   "swagger": "2.0",
+   "info": {
+      "version": "v2",
+      "title": "DocuSign REST API",
+      "description": "The DocuSign REST API provides you with a powerful, convenient, and simple Web services API for interacting with DocuSign.",
+      "termsOfService": "https://www.docusign.com/company/terms-and-conditions/web",
+      "contact": {
+         "name": "DocuSign Developer Center",
+         "url": "https://developers.docusign.com/",
+         "email": "devcenter@docusign.com"
+      }
+   },
+   "host": "www.docusign.net",
+   "basePath": "/restapi",
+   "schemes": [
+      "https"
+   ],
+   "consumes": [
+      "application/json",
+      "application/xml"
+   ],
+   "produces": [
+      "application/json"
+   ],
+   "externalDocs": {
+      "description": "See the DocuSign REST API Guide for more information.",
+      "url": "https://docs.docusign.com/esign"
+   },
+   "paths": {
+      "/v2/accounts/{accountId}/envelopes/{envelopeId}/documents": {
+         "get": {
+            "tags": [
+               "EnvelopeDocuments"
+            ],
+            "summary": "Gets a list of envelope documents.",
+            "description": "Retrieves a list of documents associated with the specified envelope.",
+            "operationId": "Documents_GetDocuments",
+            "consumes": [],
+            "parameters": [
+               {
+                  "name": "accountId",
+                  "in": "path",
+                  "description": "The external account number (int) or account ID Guid.",
+                  "required": true,
+                  "type": "string"
+               },
+               {
+                  "name": "envelopeId",
+                  "in": "path",
+                  "description": "The envelope's GUID. Eg 93be49ab-afa0-4adf-933c-f752070d71ec ",
+                  "required": true,
+                  "type": "string"
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "Successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/EnvelopeDocuments"
+                  }
+               },
+               "400": {
+                  "description": "Error encountered.",
+                  "schema": {
+                     "$ref": "#/definitions/errorDetails"
+                  }
+               }
+            },
+            "deprecated": false,
+            "x-ds-methodname": "listDocuments",
+            "x-ds-examples": [
+               {
+                  "description": "This example shows how\nto get a list\nof all the documents in an envelope.\n\nThe request for this endpoint has no payload.\n\n\n\n```\nGET /restapi/v2/accounts/1703061/envelopes/44efc9e6-915e-4b1d-9b54-801410d6922d/documents\n```\n",
+                  "direction": "response",
+                  "format": "json",
+                  "response": {
+                     "envelopeDocuments": [
+                        {
+                           "availableDocumentTypes": [
+                              {
+                                 "isDefault": "true",
+                                 "type": "electronic"
+                              }
+                           ],
+                           "display": "inline",
+                           "documentId": "1",
+                           "includeInDownload": "true",
+                           "name": "NDA.pdf",
+                           "order": "1",
+                           "pages": "3",
+                           "signerMustAcknowledge": "no_interaction",
+                           "type": "content",
+                           "uri": "/envelopes/44efc9e6-915e-4b1d-9b54-801410d6922d/documents/1"
+                        },
+                        {
+                           "availableDocumentTypes": [
+                              {
+                                 "isDefault": "true",
+                                 "type": "electronic"
+                              }
+                           ],
+                           "display": "inline",
+                           "documentId": "2",
+                           "includeInDownload": "true",
+                           "name": "House.pdf",
+                           "order": "2",
+                           "pages": "1",
+                           "signerMustAcknowledge": "no_interaction",
+                           "type": "content",
+                           "uri": "/envelopes/44efc9e6-915e-4b1d-9b54-801410d6922d/documents/2"
+                        },
+                        {
+                           "availableDocumentTypes": [
+                              {
+                                 "isDefault": "true",
+                                 "type": "electronic"
+                              }
+                           ],
+                           "display": "inline",
+                           "documentId": "3",
+                           "includeInDownload": "true",
+                           "name": "contractor_agreement.docx",
+                           "order": "3",
+                           "pages": "2",
+                           "signerMustAcknowledge": "no_interaction",
+                           "type": "content",
+                           "uri": "/envelopes/44efc9e6-915e-4b1d-9b54-801410d6922d/documents/3"
+                        },
+                        {
+                           "availableDocumentTypes": [
+                              {
+                                 "isDefault": "true",
+                                 "type": "electronic"
+                              }
+                           ],
+                           "display": "inline",
+                           "documentId": "certificate",
+                           "includeInDownload": "true",
+                           "name": "Summary",
+                           "order": "999",
+                           "pages": "4",
+                           "signerMustAcknowledge": "no_interaction",
+                           "type": "summary",
+                           "uri": "/envelopes/44efc9e6-915e-4b1d-9b54-801410d6922d/documents/certificate"
+                        }
+                     ],
+                     "envelopeId": "44efc9e6-915e-4b1d-9b54-801410d6922d"
+                  },
+                  "request": null,
+                  "style": "custom",
+                  "title": "List All Documents in an Envelope"
+               }
+            ],
+            "x-ds-method": "list",
+            "x-ds-service": "Envelopes",
+            "x-ds-in-sdk": true
+         },
+         "parameters": []
+      },
+      "/oauth/auth": {
+         "get": {
+            "produces": [
+               "text/html"
+            ],
+            "parameters": [
+               {
+                  "name": "scope",
+                  "in": "query",
+                  "required": false,
+                  "type": "string",
+                  "x-example": "signature"
+               },
+               {
+                  "name": "response_type",
+                  "in": "query",
+                  "required": false,
+                  "type": "string",
+                  "x-example": "code"
+               },
+               {
+                  "name": "redirect_uri",
+                  "in": "query",
+                  "required": false,
+                  "type": "string",
+                  "x-example": "https://puter.serveo.net/api/v1/dummy"
+               },
+               {
+                  "name": "client_id",
+                  "in": "query",
+                  "required": false,
+                  "type": "string",
+                  "x-example": "1695dfe4-88e4-404a-b39f-4cd65b292ab7"
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "Definition generated from Swagger Inspector"
+               }
+            }
+         }
+      },
+      "/oauth2/token": {
+         "post": {
+            "tags": [
+               "Authentication"
+            ],
+            "summary": "**Deprecated** Creates an authorization token.\n",
+            "description": "**Deprecated**\n\nCreates an OAuth2 authorization server token endpoint.\n",
+            "operationId": "OAuth2_PostToken",
+            "consumes": [],
+            "parameters": [],
+            "responses": {
+               "201": {
+                  "description": "Successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/oauthAccess"
+                  }
+               },
+               "400": {
+                  "description": "Error encountered.",
+                  "schema": {
+                     "$ref": "#/definitions/errorDetails"
+                  }
+               }
+            },
+            "deprecated": false,
+            "x-ds-methodname": "getOAuthToken",
+            "x-ds-method": "getOAuthToken",
+            "x-ds-service": "Authentication",
+            "x-ds-in-sdk": true
+         },
+         "parameters": [
+            {
+               "name": "code",
+               "in": "query",
+               "required": true,
+               "type": "string",
+               "x-example": "eyJ0eXAiOiJNVCIsImFsZyI6IlJTMjU2Iiwia2lkIjoiNjgxODVmZjEtNGU1MS00Y2U5LWFmMWMtNjg5ODEyMjAzMzE3In0.AQoAAAABAAYABwAA9TtpRMnWSAgAAIHCsETJ1kgCAF1hxxLqp9VCtdIk-GefqyAVAAEAAAAYAAEAAAAFAAAADQAkAAAAMTY5NWRmZTQtODhlNC00MDRhLWIzOWYtNGNkNjViMjkyYWI3NwDyZeiu47h-T5JIwPW50XlJMAAATIgdQsnWSBIAAQAAAAMAAAB0c3Y.OjhaoSMC6Qb3HFoNKcqSKcg5fpyURgj-ttgUynrREkeAqkbK6tWTmzc3fwpA3ZN3XJLYI2jI9VLO4JKaSICUIy2W_9ayjQY9QdaedlNu0t62ukvcetdLlD10czUsykN6L25dMvOJ2TVH6jsrQVro9icMqyiT5Vq6KNoWFxw5HV91GwL00sk8bHYwh53VtQjba4iWQaW2L_Ifl76HT6docG532XCWVOGxlIyyw7uQmlohNLfUhlgPHaj39A4eC9T8UFePe-oVIDL_DraFLVIIocseWs88k3hKwElNLgPe0stbduwc2-5qDbJAYQiF98tE2CMgyka9cnyJHJ99reIpNw"
+            },
+            {
+               "name": "grant_type",
+               "in": "query",
+               "required": false,
+               "type": "string",
+               "x-example": "authorization_code"
+            }
+         ]
+      },
+      "/v2/accounts/{accountId}/envelopes/{envelopeId}": {
+         "get": {
+            "tags": [
+               "Envelopes"
+            ],
+            "summary": "Gets the status of a single envelope.",
+            "description": "Retrieves the overall status for the specified envelope.\n\nTo get the status of a list of envelopes, use [Envelope: listStatusChanges ](/esign/restapi/Envelopes/Envelopes/listStatusChanges/)",
+            "operationId": "Envelopes_GetEnvelope",
+            "consumes": [],
+            "parameters": [
+               {
+                  "name": "accountId",
+                  "in": "path",
+                  "description": "The external account number (int) or account ID Guid.",
+                  "required": true,
+                  "type": "string"
+               },
+               {
+                  "name": "envelopeId",
+                  "in": "path",
+                  "description": "The envelope's GUID. Eg 93be49ab-afa0-4adf-933c-f752070d71ec ",
+                  "required": true,
+                  "type": "string"
+               },
+               {
+                  "name": "advanced_update",
+                  "in": "query",
+                  "description": "When true, envelope information can be added or modified.",
+                  "required": false,
+                  "type": "string"
+               },
+               {
+                  "name": "include",
+                  "in": "query",
+                  "required": false,
+                  "type": "string",
+                  "description": "Reserved for DocuSign.\n"
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "Successful response.",
+                  "schema": {
+                     "$ref": "#/definitions/Envelopes"
+                  }
+               },
+               "400": {
+                  "description": "Error encountered.",
+                  "schema": {
+                     "$ref": "#/definitions/Envelopes"
+                  }
+               }
+            },
+            "deprecated": false,
+            "x-ds-methodname": "getEnvelope",
+            "x-ds-examples": [
+               {
+                  "description": "This example shows a how to get information about\nan envelope with a given envelope id.\n\nThe request for this endpoint has no payload.\n"
+               }
+            ]
+         }
+      },
+      "/oauth/userinfo": {
+         "get": {
+            "produces": [
+               "application/json"
+            ],
+            "parameters": [],
+            "responses": {
+               "200": {
+                  "description": "Definition generated from Swagger Inspector",
+                  "schema": {
+                     "$ref": "#/definitions/Model0"
+                  }
+               },
+               "401": {
+                  "description": "Definition generated from Swagger Inspector",
+                  "schema": {
+                     "$ref": "#/definitions/Model1"
+                  }
+               }
+            },
+            "security": [
+               {
+                  "Secured": []
+               }
+            ]
+         }
+      }
+   },
+   "securityDefinitions": {
+      "Secured": {
+         "type": "oauth2",
+         "authorizationUrl": "https://example.com",
+         "flow": "implicit",
+         "scopes": {}
+      }
+   },
+   "definitions": {
+      "Envelopes": {
+         "type": "object",
+         "properties": {
+            "allowMarkup": {
+               "description": "When set to **true**, Document Markup is enabled for envelope. Account must have Document Markup enabled to use this",
+               "type": "string"
+            },
+            "allowReassign": {
+               "description": "When set to **true**, the recipient can redirect an envelope to a more appropriate recipient.",
+               "type": "string"
+            },
+            "allowViewHistory": {
+               "description": "",
+               "type": "string"
+            },
+            "asynchronous": {
+               "description": "When set to **true**, the envelope is queued for processing and the value of the `status` property is set to 'Processing'. Additionally, get status calls return 'Processing' until completed.",
+               "type": "string"
+            },
+            "attachmentsUri": {
+               "description": "",
+               "type": "string"
+            },
+            "authoritativeCopy": {
+               "description": "Specifies whether all documents in this envelope are authoritative copies.\nA document can set its own `authoritativeCopy` property to override this value. For example you can set the authoritativeCopy on an envelope level to true but can turn it off for a specific document.",
+               "type": "string"
+            },
+            "authoritativeCopyDefault": {
+               "description": "The default `authoritativeCopy` setting for documents in this envelope that do not have `authoritativeCopy` set.\nIf this property is not set, each document defaults to the envelope's `authoritativeCopy`.",
+               "type": "string"
+            },
+            "autoNavigation": {
+               "description": "Specifies whether auto navigation is set for the recipient.\n",
+               "type": "string"
+            },
+            "brandId": {
+               "description": "The unique identifier of a brand.",
+               "type": "string"
+            },
+            "brandLock": {
+               "description": "",
+               "type": "string"
+            },
+            "certificateUri": {
+               "description": "Retrieves a URI for an endpoint that allows you to easily retrieve certificate information.",
+               "type": "string"
+            },
+            "completedDateTime": {
+               "description": "Specifies the date and time this item was completed.",
+               "type": "string"
+            },
+            "createdDateTime": {
+               "description": "Indicates the date and time the item was created.",
+               "type": "string"
+            },
+            "customFieldsUri": {
+               "description": "Contains a URI for an endpoint that you can use to retrieve the custom fields.",
+               "type": "string"
+            },
+            "declinedDateTime": {
+               "description": "The date and time the recipient declined the document.",
+               "type": "string"
+            },
+            "deletedDateTime": {
+               "description": "Specifies the data and time the item was deleted.",
+               "type": "string"
+            },
+            "deliveredDateTime": {
+               "description": "Reserved: For DocuSign use only.",
+               "type": "string"
+            },
+            "documentsCombinedUri": {
+               "description": "",
+               "type": "string"
+            },
+            "documentsUri": {
+               "description": "Contains a URI for an endpoint that you can use to retrieve the documents.",
+               "type": "string"
+            },
+            "emailBlurb": {
+               "description": "This is the same as the email body. If specified it is included in email body for all envelope recipients.",
+               "type": "string"
+            },
+            "envelopeId": {
+               "description": "The envelope ID of the envelope status that failed to post.",
+               "type": "string"
+            },
+            "envelopeIdStamping": {
+               "description": "When set to **true**, Envelope ID Stamping is enabled.",
+               "type": "string"
+            },
+            "envelopeUri": {
+               "description": "Contains a URI for an endpoint that you can use to retrieve the envelope or envelopes.",
+               "type": "string"
+            },
+            "initialSentDateTime": {
+               "description": "",
+               "type": "string"
+            },
+            "is21CFRPart11": {
+               "description": "When set to **true**, indicates that this module is enabled on the account.",
+               "type": "string"
+            },
+            "isSignatureProviderEnvelope": {
+               "description": "",
+               "type": "string"
+            },
+            "lastModifiedDateTime": {
+               "description": "The date and time the item was last modified.",
+               "type": "string"
+            },
+            "messageLock": {
+               "description": "When set to **true**, prevents senders from changing the contents of `emailBlurb` and `emailSubject` properties for the envelope.\n\nAdditionally, this prevents users from making changes to the contents of `emailBlurb` and `emailSubject` properties when correcting envelopes.\n\nHowever, if the `messageLock` node is set to true**** and the `emailSubject` property is empty, senders and correctors are able to add a subject to the envelope.",
+               "type": "string"
+            },
+            "notificationUri": {
+               "description": "Contains a URI for an endpoint that you can use to retrieve the notifications.",
+               "type": "string"
+            },
+            "purgeState": {
+               "description": "Shows the current purge state for the envelope. The possible values are:\n\n* `unpurged`: There has been no successful request to purge documents.\n* `documents_queued`: The envelope documents have been added to the purge queue, but have not been purged.\n* `documents_and_metadata_queued`: The envelope documents and metadata have been added to the purge queue, but have not yet been purged.\n* `documents_purged`: The envelope documents have been successfully purged.\n* `documents_and_metadata_purged`: The envelope documents and metadata have been successfully purged.\n",
+               "type": "string"
+            },
+            "recipientsLock": {
+               "description": "When set to **true**, prevents senders from changing, correcting, or deleting the recipient information for the envelope.",
+               "type": "string"
+            },
+            "recipientsUri": {
+               "description": "Contains a URI for an endpoint that you can use to retrieve the recipients.",
+               "type": "string"
+            },
+            "sentDateTime": {
+               "description": "The date and time the envelope was sent.",
+               "type": "string"
+            },
+            "signerCanSignOnMobile": {
+               "description": "",
+               "type": "string"
+            },
+            "signingLocation": {
+               "description": "Specifies the physical location where the signing takes place. It can have two enumeration values; InPerson and Online. The default value is Online.",
+               "type": "string"
+            },
+            "status": {
+               "description": "Indicates the envelope status. Valid values are:\n\n* completed - The envelope has been completed and all tags have been signed.\n* created - The envelope is created as a draft. It can be modified and sent later.\n* declined - The envelope has been declined by the recipients.\n* delivered - The envelope has been delivered to the recipients.\n* sent - The envelope is sent to the recipients.\n* signed - The envelope has been signed by the recipients.\n* voided - The envelope is no longer valid and recipients cannot access or sign the envelope.\n",
+               "type": "string"
+            },
+            "statusChangedDateTime": {
+               "description": "The data and time the status changed.",
+               "type": "string"
+            },
+            "templatesUri": {
+               "description": "Contains a URI for an endpoint which you can use to retrieve the templates.",
+               "type": "string"
+            },
+            "transactionId": {
+               "description": " Used to identify an envelope. The id is a sender-generated value and is valid in the DocuSign system for 7 days. It is recommended that a transaction ID is used for offline signing to ensure that an envelope is not sent multiple times. The `transactionId` property can be used determine an envelope's status (i.e. was it created or not) in cases where the internet connection was lost before the envelope status was returned.",
+               "type": "string"
+            },
+            "useDisclosure": {
+               "description": "When set to **true**, the disclosure is shown to recipients in accordance with the account's Electronic Record and Signature Disclosure frequency setting. When set to **false**, the Electronic Record and Signature Disclosure is not shown to any envelope recipients.\n\nIf the `useDisclosure` property is not set, then the account's normal disclosure setting is used and the value of the `useDisclosure` property is not returned in responses when getting envelope information.",
+               "type": "string"
+            },
+            "voidedDateTime": {
+               "description": "The date and time the envelope or template was voided.",
+               "type": "string"
+            },
+            "voidedReason": {
+               "description": "The reason the envelope or template was voided.",
+               "type": "string"
+            }
+         },
+         "description": "Envelope creation, management",
+         "x-ds-definition-name": "envelope",
+         "x-ds-category": "Envelopes",
+         "x-ds-order": "10",
+         "x-ms-summary": "Envelope creation, management"
+      },
+      "EnvelopeDocuments": {
+         "type": "object",
+         "properties": {
+            "envelopeDocuments": {
+               "description": "",
+               "type": "array",
+               "items": {
+                  "$ref": "#/definitions/envelopeDocument"
+               }
+            },
+            "envelopeId": {
+               "description": "The envelope ID of the envelope status that failed to post.",
+               "type": "string"
+            }
+         },
+         "description": "Envelope documents",
+         "x-ds-definition-name": "envelopeDocumentsResult",
+         "x-ds-category": "Envelopes",
+         "x-ds-order": "40",
+         "x-ms-summary": "Envelope documents"
+      },
+      "envelopeDocument": {
+         "type": "object",
+         "properties": {
+            "attachmentTabId": {
+               "description": "",
+               "type": "string"
+            },
+            "authoritativeCopy": {
+               "description": "Specifies whether all documents in this envelope are authoritative copies.\nA document can set its own `authoritativeCopy` property to override this value. For example you can set the authoritativeCopy on an envelope level to true but can turn it off for a specific document.",
+               "type": "string"
+            },
+            "containsPdfFormFields": {
+               "description": "",
+               "type": "string"
+            },
+            "display": {
+               "description": "This string sets the display and behavior properties of\nthe document during signing. The possible values are:\n\n* `modal`<br>\n  The document is shown as a supplement action strip\n  and can be viewed, downloaded, or printed in a modal window.\n  This is the recommended value for supplemental documents. \n\n* `download`<br>\n  The document is shown as a supplement action strip\n  and can be viewed, downloaded, or printed in a new browser window. \n\n* `inline`<br>\n  The document is shown in the normal signing window.\n  This value is not used with supplemental documents,\n  but is the default value for all other documents.\n",
+               "type": "string"
+            },
+            "documentGroup": {
+               "description": "",
+               "type": "string"
+            },
+            "documentId": {
+               "description": "Specifies the document ID number that the tab is placed on. This must refer to an existing Document's ID attribute.",
+               "type": "string"
+            },
+            "errorDetails": {
+               "$ref": "#/definitions/errorDetails",
+               "description": ""
+            },
+            "includeInDownload": {
+               "description": "When set to **true**,\nthe document is included in the combined document download. \nThe default value is **true**.\n",
+               "type": "string"
+            },
+            "name": {
+               "description": "",
+               "type": "string"
+            },
+            "order": {
+               "description": "An optional value that sets the direction order used to sort the item list.\n\nValid values are:\n\n* asc = ascending sort order\n* desc = descending sort order",
+               "type": "string"
+            },
+            "pages": {
+               "description": "",
+               "type": "string"
+            },
+            "signerMustAcknowledge": {
+               "description": "Sets how the signer interacts with the supplemental document.\nThe possible values are: \n\n*\t`no_interaction`<br>\n  No recipient action is required. \n\n*\t`view`<br>\n  The recipient is required to view the document. \n\n*\t`accept`<br>\n  The recipient is required to accept the document by selecting accept during signing, but is not required to view the document. \n\n*\t`view_accept`<br>\n  The recipient is required to view and accept the document.  \n\n",
+               "type": "string"
+            },
+            "type": {
+               "description": "Type of the user. Valid values: type_owner, type_participant.",
+               "type": "string"
+            },
+            "uri": {
+               "description": "",
+               "type": "string"
+            }
+         },
+         "description": "",
+         "x-ds-definition-name": "envelopeDocument",
+         "x-ms-summary": ""
+      },
+      "errorDetails": {
+         "description": "This object describes errors that occur. It is only valid for responses, and ignored in requests.",
+         "type": "object",
+         "properties": {
+            "errorCode": {
+               "description": "An error code associated with the error.",
+               "type": "string"
+            },
+            "message": {
+               "description": "A short error message.",
+               "type": "string"
+            }
+         },
+         "x-ds-definition-name": "errorDetails",
+         "x-ms-summary": "This object describes errors that occur. It is only valid for responses, and ignored in requests."
+      },
+      "Links": {
+         "properties": {
+            "rel": {
+               "type": "string"
+            },
+            "href": {
+               "type": "string"
+            }
+         }
+      },
+      "Organization": {
+         "properties": {
+            "organization_id": {
+               "type": "string"
+            },
+            "links": {
+               "type": "array",
+               "items": {
+                  "$ref": "#/definitions/Links"
+               }
+            }
+         }
+      },
+      "Accounts": {
+         "properties": {
+            "account_id": {
+               "type": "string"
+            },
+            "is_default": {
+               "type": "boolean"
+            },
+            "account_name": {
+               "type": "string"
+            },
+            "base_uri": {
+               "type": "string"
+            },
+            "organization": {
+               "$ref": "#/definitions/Organization"
+            }
+         }
+      },
+      "Model0": {
+         "properties": {
+            "sub": {
+               "type": "string"
+            },
+            "name": {
+               "type": "string"
+            },
+            "given_name": {
+               "type": "string"
+            },
+            "family_name": {
+               "type": "string"
+            },
+            "created": {
+               "type": "string"
+            },
+            "email": {
+               "type": "string"
+            },
+            "accounts": {
+               "type": "array",
+               "items": {
+                  "$ref": "#/definitions/Accounts"
+               }
+            }
+         }
+      },
+      "Model1": {
+         "properties": {
+            "error": {
+               "type": "string"
+            },
+            "reference_id": {
+               "type": "string"
+            }
+         }
+      },
+      "oauthAccess": {
+         "type": "object",
+         "properties": {
+            "access_token": {
+               "description": "Access token information.",
+               "type": "string"
+            },
+            "token_type": {
+               "description": "",
+               "type": "string"
+            },
+            "refresh_token": {
+               "description": "",
+               "type": "string"
+            },
+            "expires_in": {
+               "description": "",
+               "type": "string"
+            }
+         },
+         "description": "",
+         "x-ds-definition-name": "oauthAccess",
+         "x-ms-summary": ""
+      },
+      "nameValue": {
+         "type": "object",
+         "properties": {
+            "errorDetails": {
+               "$ref": "#/definitions/errorDetails",
+               "description": ""
+            },
+            "name": {
+               "description": "The name or key of a name/value pair.",
+               "type": "string"
+            },
+            "originalValue": {
+               "description": "The initial value of the tab when it was sent to the recipient. ",
+               "type": "string"
+            },
+            "value": {
+               "description": "The value field of a name/value pair.",
+               "type": "string"
+            }
+         },
+         "description": "",
+         "x-ds-definition-name": "nameValue",
+         "x-ms-summary": ""
+      }
+   }
+}
